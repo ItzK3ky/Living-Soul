@@ -37,8 +37,8 @@ public class PlayerMovement : MonoBehaviour
 
 	void FixedUpdate()
     {
-		#region Rigidbody-based Movement + related input
-		if (Input.GetKey(KeyCode.A) && !isTouchingWallLeft() && !isKnockedBack)
+		    #region Rigidbody-based Movement + related input
+		    if (Input.GetKey(KeyCode.A) && !isTouchingWallLeft() && !isKnockedBack)
         {
             rb.velocity = new Vector2(-10 * playerSpeed * Time.fixedDeltaTime, rb.velocity.y);
 
@@ -59,10 +59,10 @@ public class PlayerMovement : MonoBehaviour
 
     private void FlipPlayer(bool flipLeft)
     {
-        if (flipLeft)
-            transform.rotation = new Quaternion(0, 180, 0, 0);
+        if(flipLeft)
+            transform.Rotate(0, 20, 0);
         else
-            transform.rotation = new Quaternion(0, 0, 0, 0);
+            transform.Rotate(0, 0, 0);
     }
 
 	#region Player Checks
