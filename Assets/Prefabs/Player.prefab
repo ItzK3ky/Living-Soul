@@ -13,8 +13,9 @@ GameObject:
   - component: {fileID: 8014187930046328003}
   - component: {fileID: 1764882533256979816}
   - component: {fileID: 2228892111961599739}
+  - component: {fileID: 7136268521765431328}
+  - component: {fileID: -5847833201122633458}
   - component: {fileID: 1620568796884088961}
-  - component: {fileID: 9149481575290123797}
   m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
@@ -175,17 +176,37 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerSpeed: 32
   jumpPower: 17
-  knockedBackTimeInSec: 0.2
-  dashingSpeed: 1500
-  dashingTimeInSec: 0.1
-  dashCooldownInSec: 1
   mapLayer:
     serializedVersion: 2
     m_Bits: 64
-  movableBlockLayer:
+  jumpableLayers:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 192
+--- !u!114 &7136268521765431328
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1902298787715768630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b5f384c758ecd54e86ed7eb8fc76c71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   onPlayerInteractWithInteractable: {fileID: 11400000, guid: 62c88651b2675b64e955a8f53cabde87, type: 2}
+--- !u!114 &-5847833201122633458
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1902298787715768630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a867594d20ff3044db92200321238d18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1620568796884088961
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -202,37 +223,9 @@ MonoBehaviour:
   response:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2228892111961599739}
-        m_TargetAssemblyTypeName: PlayerManager, Assembly-CSharp
+      - m_Target: {fileID: -5847833201122633458}
+        m_TargetAssemblyTypeName: KillPlayerManager, Assembly-CSharp
         m_MethodName: KillPlayer
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &9149481575290123797
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1902298787715768630}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3b0c5b6fa223e0c4babfeb6cc21427b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameEvent: {fileID: 11400000, guid: 5c1c4190bceb63f4ca9c8d3d38d63fd1, type: 2}
-  response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2228892111961599739}
-        m_TargetAssemblyTypeName: PlayerManager, Assembly-CSharp
-        m_MethodName: GetKnockback
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

@@ -6,7 +6,7 @@ using UnityEngine;
 public class GameEvent : ScriptableObject
 {
 	[SerializeField, Tooltip("This event should cause an action")] private bool activeEvent;
-	[SerializeField, Tooltip("This event should notify of an action/event, that happened")] private bool passiveEvent;
+	[SerializeField, Tooltip("This event should notify of an event, that happened")] private bool passiveEvent;
 	[SerializeField, TextArea, Tooltip("Optional")] private string dataDescription;
 
 	public List<GameEventListener> listeners = new List<GameEventListener>();
