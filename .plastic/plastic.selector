@@ -1,4 +1,0 @@
-repository "Living Soul@Jozen_Studios@cloud"
-  path "/"
-    smartbranch "/main"       
-     
