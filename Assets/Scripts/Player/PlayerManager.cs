@@ -9,14 +9,6 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private float jumpPower;
     [SerializeField] private float knockedBackTimeInSec;
 
-    [Header("Dashing Attributes")]
-    [SerializeField] private float dashingSpeed;
-    [SerializeField] private float dashingTimeInSec;
-    [SerializeField] private float dashCooldownInSec;
-    private bool isDashing = false;
-    private bool canDash = true;
-    private int dashingDirection;
-
     [Header("Layers")]
     [SerializeField] private LayerMask mapLayer;
     [SerializeField] private LayerMask movableBlockLayer;
@@ -45,14 +37,6 @@ public class PlayerManager : MonoBehaviour
         {
             rb.velocity += new Vector2(0, 1 * jumpPower);
         }
-
-        if (Input.GetButtonDown("Dash") && canDash)
-        {
-            isDashing = true;
-            canDash = false;
-            StartCoroutine(DashTimer());
-            StartCoroutine(StopDash());
-        }
 		#endregion
 
 		#region Other Input
@@ -73,14 +57,12 @@ public class PlayerManager : MonoBehaviour
 		if (Input.GetKey(KeyCode.A) && !isTouchingWallLeft() && !isKnockedBack)
         {
             rb.velocity = new Vector2(-10 * playerSpeed * Time.fixedDeltaTime, rb.velocity.y);
-            dashingDirection = -1;
 
             FlipPlayer(true);
         }
         if (Input.GetKey(KeyCode.D) && !isTouchingWallRight() && !isKnockedBack)
         {
             rb.velocity = new Vector2(10 * playerSpeed * Time.fixedDeltaTime, rb.velocity.y);
-            dashingDirection = 1;
 
             FlipPlayer(false);
         }
@@ -88,24 +70,6 @@ public class PlayerManager : MonoBehaviour
         {
             rb.velocity = new Vector2(0, rb.velocity.y);
         }
-        #endregion
-
-        #region Dashing + related Input
-
-        #region Dashing-Movement
-        if (isDashing)
-        {
-            rb.velocity = new Vector2(dashingDirection * dashingSpeed * Time.fixedDeltaTime, rb.velocity.y);
-        } else
-        {
-            dashingDirection = 0;
-        }
-        #endregion
-
-        #region Killing enemys
-
-        #endregion
-
         #endregion
     }
 
@@ -129,18 +93,7 @@ public class PlayerManager : MonoBehaviour
     //Only called by event
     public void KillPlayer(Component sender, object data)
     {
-        //Check if player is currently dashing, only die if not
-        if (!isDashing)
-        {
-            GameObject.Destroy(gameObject);
-        }
-        else if (isDashing)
-        {
-            //Kill enemy
-            sender.GetComponent<Enemy>().KillEnemy(this, null);
-
-            isDashing = false;
-        }
+        GameObject.Destroy(gameObject);
     }
 
     //Only called by event
@@ -175,21 +128,6 @@ public class PlayerManager : MonoBehaviour
             || Physics2D.BoxCast(coll.bounds.center, coll.bounds.size, 0f, Vector2.down, 0.05f, movableBlockLayer))
             return true;
         else return false;
-    }
-	#endregion
-
-	#region Dash Related
-	private IEnumerator DashTimer()
-    {
-        yield return new WaitForSeconds(dashCooldownInSec);
-
-        canDash = true;
-    }
-    private IEnumerator StopDash()
-    {
-        yield return new WaitForSeconds(dashingTimeInSec);
-
-        isDashing = false;
     }
 	#endregion
 
