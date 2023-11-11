@@ -182,7 +182,7 @@ MonoBehaviour:
     m_Bits: 64
   jumpableLayers:
     serializedVersion: 2
-    m_Bits: 192
+    m_Bits: 2240
 --- !u!114 &7136268521765431328
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -248,3 +248,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf1cd85f72b7fe64fa306e72a9cf8250, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cooldownInSec: 1
+  gravityChangedEvent: {fileID: 11400000, guid: 347d8692ee71ae149b3e91f778c2a0e0, type: 2}
