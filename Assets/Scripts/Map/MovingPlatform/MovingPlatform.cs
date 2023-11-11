@@ -23,17 +23,16 @@ public class MovingPlatform : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
 
         if (startingDirection == 0)
-            Debug.LogError("This platform has no set starting direction");
+            Debug.LogError("This platform has no set starting direction!");
         else
             horizontalMovingDirection = startingDirection;
     }
 
     void Update()
     {
-        //Check if the start position is reached
+        //Check if the start/end position is reached
         if(transform.position.x <= startPosition.position.x)
         {
-            //Stop moving the platform
             horizontalMovingDirection = 0;
             StartCoroutine(ChangeMovingDirection(1));
         } else if (transform.position.x >= endPosition.position.x)
@@ -45,7 +44,27 @@ public class MovingPlatform : MonoBehaviour
 
     void FixedUpdate()
     {
-        rb.velocity = new Vector2(horizontalMovingDirection * platformSpeed * Time.fixedDeltaTime, rb.velocity.y);
+        if(horizontalMovingDirection == 0)
+        {
+            Debug.Log("Not moving");
+        } else if(horizontalMovingDirection == -1)
+        {
+            Debug.Log("Moving left");
+        }else if(horizontalMovingDirection == 1)
+        {
+            Debug.Log("Moving right");
+        } else
+        {
+            Debug.Log("bro what something else huh");
+        }
+
+        float verticalMovement = 0;
+        if (horizontalMovingDirection == -1)
+            verticalMovement = (startPosition.position.y - transform.position.y) * platformSpeed * Time.fixedDeltaTime;
+        else if (horizontalMovingDirection == 1)
+            verticalMovement = (endPosition.position.y - transform.position.y) * platformSpeed * Time.fixedDeltaTime;
+
+        rb.velocity = new Vector2(horizontalMovingDirection * platformSpeed * Time.fixedDeltaTime, verticalMovement);
     }
 
     private IEnumerator ChangeMovingDirection(int newMovingDirection)
