@@ -59,14 +59,20 @@ public class PlayerMovement : MonoBehaviour
 
     private void FlipPlayer(bool flipLeft)
     {
-        if(flipLeft)
-            transform.Rotate(0, 20, 0);
+        if(Physics2D.gravity.y < 0)
+            if (flipLeft)
+                transform.eulerAngles = new Vector3(transform.eulerAngles.x, 180, transform.eulerAngles.z);
+            else
+                transform.eulerAngles = new Vector3(transform.eulerAngles.x, 0, transform.eulerAngles.z);
         else
-            transform.Rotate(0, 0, 0);
+            if (flipLeft)
+                transform.eulerAngles = new Vector3(transform.eulerAngles.x, 0, transform.eulerAngles.z);
+            else
+                transform.eulerAngles = new Vector3(transform.eulerAngles.x, 180, transform.eulerAngles.z);
     }
 
-	#region Player Checks
-	private bool isTouchingWallLeft()
+    #region Player Checks
+    private bool isTouchingWallLeft()
     {
         return Physics2D.BoxCast(coll.bounds.center, coll.bounds.size, 0f, Vector2.left, 0.01f, mapLayer);
     }

@@ -13,6 +13,10 @@ MonoBehaviour:
   m_Name: GravityChanged
   m_EditorClassIdentifier: 
   activeEvent: 0
-  passiveEvent: 0
-  dataDescription: 
+  passiveEvent: 1
+  dataDescription: 'data = new gravity direction
+
+    -1 = downward
+
+    1 = upward'
   listeners: []
