@@ -44,20 +44,6 @@ public class MovingPlatform : MonoBehaviour
 
     void FixedUpdate()
     {
-        if(horizontalMovingDirection == 0)
-        {
-            Debug.Log("Not moving");
-        } else if(horizontalMovingDirection == -1)
-        {
-            Debug.Log("Moving left");
-        }else if(horizontalMovingDirection == 1)
-        {
-            Debug.Log("Moving right");
-        } else
-        {
-            Debug.Log("bro what something else huh");
-        }
-
         float verticalMovement = 0;
         if (horizontalMovingDirection == -1)
             verticalMovement = (startPosition.position.y - transform.position.y) * platformSpeed * Time.fixedDeltaTime;
