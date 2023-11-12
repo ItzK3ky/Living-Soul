@@ -701,7 +701,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1468082685729223766, guid: f44fea4727ab1714c89f503e7e682dce, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -10
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1468082685729223766, guid: f44fea4727ab1714c89f503e7e682dce, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1202,7 +1202,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2338209526149831063, guid: ac5aac9b5ca2bb1429fadb4a05b22c0a, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -20
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 2338209526149831063, guid: ac5aac9b5ca2bb1429fadb4a05b22c0a, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1484,6 +1484,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 733446557486305572, guid: 166fc90d6f0def048bd4bca3ce54399c, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 733446557486305572, guid: 166fc90d6f0def048bd4bca3ce54399c, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 1773791095
+      objectReference: {fileID: 0}
     - target: {fileID: 4979260536791573193, guid: 166fc90d6f0def048bd4bca3ce54399c, type: 3}
       propertyPath: m_Name
       value: Gravity Platform

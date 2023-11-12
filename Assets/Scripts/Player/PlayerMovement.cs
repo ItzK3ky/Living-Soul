@@ -30,7 +30,10 @@ public class PlayerMovement : MonoBehaviour
 		#region Movement + related input
 		if (Input.GetButtonDown("Jump") && IsGrounded() && !isKnockedBack)
         {
-            rb.velocity += new Vector2(0, 1 * jumpPower);
+            if(Physics2D.gravity.y < 0)
+                rb.velocity += new Vector2(0, 1 * jumpPower);
+            else
+                rb.velocity += new Vector2(0, -1 * jumpPower);
         }
 		#endregion
 	}
@@ -83,10 +86,16 @@ public class PlayerMovement : MonoBehaviour
 
 	private bool IsGrounded()
     {
-        if (Physics2D.BoxCast(coll.bounds.center, coll.bounds.size, 0f, Vector2.down, 0.05f, jumpableLayers))
-            return true;
+        if(Physics2D.gravity.y < 0)
+            if (Physics2D.BoxCast(coll.bounds.center, coll.bounds.size, 0f, Vector2.down, 0.05f, jumpableLayers))
+                return true;
+            else
+                return false;
         else
-            return false;
+            if (Physics2D.BoxCast(coll.bounds.center, coll.bounds.size, 0f, Vector2.up, 0.05f, jumpableLayers))
+                return true;
+            else
+                return false;
     }
 	#endregion
 }
