@@ -9,54 +9,44 @@ public class MovingPlatform : MonoBehaviour
     [SerializeField] private float platformWaitTimeInSec;
     [SerializeField] private int startingDirection;
 
-    private int horizontalMovingDirection;
-
     [Header("Start and end position")]
     [SerializeField] private Transform startPosition;
     [SerializeField] private Transform endPosition;
 
-    //Components
-    private Rigidbody2D rb;
+    private Vector3 moveTowards;
 
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
 
         if (startingDirection == 0)
             Debug.LogError("This platform has no set starting direction!");
+        else if (startingDirection == -1)
+            moveTowards = startPosition.position;
+        else if (startingDirection == 1)
+            moveTowards = endPosition.position;
         else
-            horizontalMovingDirection = startingDirection;
+            Debug.Log("This starting direction is invalid. Starting direction can only be 1 (right) or -1 (left)");
     }
 
     void Update()
     {
         //Check if the start/end position is reached
-        if(transform.position.x <= startPosition.position.x)
+        if(transform.position == startPosition.position)
         {
-            horizontalMovingDirection = 0;
-            StartCoroutine(ChangeMovingDirection(1));
-        } else if (transform.position.x >= endPosition.position.x)
+            StartCoroutine(ChangeMovingDirection(endPosition.position));
+        } else if (transform.position == endPosition.position)
         {
-            horizontalMovingDirection = 0;
-            StartCoroutine(ChangeMovingDirection(-1));
+            StartCoroutine(ChangeMovingDirection(startPosition.position));
         }
+
+        //Move towards
+        transform.position = Vector3.MoveTowards(transform.position, moveTowards, platformSpeed * Time.deltaTime);
     }
 
-    void FixedUpdate()
-    {
-        float verticalMovement = 0;
-        if (horizontalMovingDirection == -1)
-            verticalMovement = (startPosition.position.y - transform.position.y) * platformSpeed * Time.fixedDeltaTime;
-        else if (horizontalMovingDirection == 1)
-            verticalMovement = (endPosition.position.y - transform.position.y) * platformSpeed * Time.fixedDeltaTime;
-
-        rb.velocity = new Vector2(horizontalMovingDirection * platformSpeed * Time.fixedDeltaTime, verticalMovement);
-    }
-
-    private IEnumerator ChangeMovingDirection(int newMovingDirection)
+    private IEnumerator ChangeMovingDirection(Vector3 newMoveTowards)
     {
         yield return new WaitForSeconds(platformWaitTimeInSec);
 
-        horizontalMovingDirection = newMovingDirection;
+        moveTowards = newMoveTowards;
     }
 }

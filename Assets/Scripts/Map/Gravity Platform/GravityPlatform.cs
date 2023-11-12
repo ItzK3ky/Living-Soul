@@ -11,11 +11,13 @@ public class GravityPlatform : MonoBehaviour
     [SerializeField] private bool activeWhenGravityIsFlipped;
 
     //Components
+    private Rigidbody2D rb;
     private SpriteRenderer spriteRenderer;
     private BoxCollider2D coll;
 
     void Start()
     {
+        rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         coll = GetComponent<BoxCollider2D>();
     }
