@@ -39,7 +39,6 @@ public class MovingPlatform : MonoBehaviour
             StartCoroutine(ChangeMovingDirection(startPosition.position));
         }
 
-        //Move towards
         transform.position = Vector3.MoveTowards(transform.position, moveTowards, platformSpeed * Time.deltaTime);
     }
 
