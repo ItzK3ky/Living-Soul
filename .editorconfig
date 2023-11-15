@@ -2,3 +2,6 @@
 
 # CS0108: Element blendet vererbte Element aus; fehlendes 'new'-Schlüsselwort
 dotnet_diagnostic.CS0108.severity = none
+
+# CS1717: Die Zuweisung wurde für dieselbe Variable durchgeführt.
+dotnet_diagnostic.CS1717.severity = silent
