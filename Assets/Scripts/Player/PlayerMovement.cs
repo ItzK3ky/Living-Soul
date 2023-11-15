@@ -14,10 +14,7 @@ public class PlayerMovement : MonoBehaviour
 
     //Components
     private Rigidbody2D rb;
-    private BoxCollider2D coll; 
-    
-    //Other variables
-    private bool isKnockedBack;    //Needed, to stop update methods from overwriting the knockback velocity instantly
+    private BoxCollider2D coll;
 
     void Start()
     {
@@ -28,7 +25,7 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
 		#region Movement + related input
-		if (Input.GetButtonDown("Jump") && IsGrounded() && !isKnockedBack)
+		if (Input.GetButtonDown("Jump") && IsGrounded())
         {
             if(Physics2D.gravity.y < 0)
                 rb.velocity += new Vector2(0, 1 * jumpPower);
@@ -41,13 +38,13 @@ public class PlayerMovement : MonoBehaviour
 	void FixedUpdate()
     {
 		    #region Rigidbody-based Movement + related input
-		    if (Input.GetKey(KeyCode.A) && !isTouchingWallLeft() && !isKnockedBack)
+		    if (Input.GetKey(KeyCode.A) && !isTouchingWallLeft())
         {
             rb.velocity = new Vector2(-10 * playerSpeed * Time.fixedDeltaTime, rb.velocity.y);
 
             FlipPlayer(true);
         }
-        if (Input.GetKey(KeyCode.D) && !isTouchingWallRight() && !isKnockedBack)
+        if (Input.GetKey(KeyCode.D) && !isTouchingWallRight())
         {
             rb.velocity = new Vector2(10 * playerSpeed * Time.fixedDeltaTime, rb.velocity.y);
 
